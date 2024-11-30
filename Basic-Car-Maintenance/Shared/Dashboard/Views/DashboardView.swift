@@ -15,6 +15,7 @@ struct DashboardView: View {
     @State private var viewModel: DashboardViewModel
     @State private var isShowingEditView = false
     @State private var isShowingExportOptionsView = false
+    @State private var isShowingVehicleSelection = false
     @State private var selectedMaintenanceEvent: MaintenanceEvent?
     
     init(userUID: String?) {
@@ -94,6 +95,12 @@ struct DashboardView: View {
                             systemImage: "wrench",
                             description: Text("Add your first maintenance")
                         )
+                    } else if viewModel.sortedEvents.isEmpty && viewModel.sortOption == .vehicleType {
+                        ContentUnavailableView(
+                            "No Results",
+                            systemImage: SFSymbol.magnifyingGlass,
+                            description: Text("No maintenance events found for the selected vehicle.")
+                        )
                     } else if viewModel.searchedEvents.isEmpty && !viewModel.searchText.isEmpty {
                         ContentUnavailableView("No results",
                                                systemImage: SFSymbol.magnifyingGlass,
@@ -123,12 +130,21 @@ struct DashboardView: View {
                     Menu {
                         Picker(selection: $viewModel.sortOption) {
                             ForEach(DashboardViewModel.SortOption.allCases) { option in
-                                Text(option.label)
-                                    .tag(option)
+                                if option != .vehicleType {
+                                    Text(option.label)
+                                        .tag(option)
+                                }
                             }
                         } label: {
                             EmptyView()
                         }
+                        
+                        Button(action: {
+                            viewModel.sortOption = .vehicleType
+                            isShowingVehicleSelection = true
+                        }, label: {
+                            Text(DashboardViewModel.SortOption.vehicleType.label)
+                        })
                     } label: {
                         Image(systemName: SFSymbol.filter)
                     }
@@ -182,6 +198,12 @@ struct DashboardView: View {
             .sheet(isPresented: $isShowingExportOptionsView) {
                 ExportOptionsView(dataSource: viewModel.vehiclesWithSortedEventsDict)
                     .presentationDetents([.medium])
+            }
+            .sheet(isPresented: $isShowingVehicleSelection) {
+                VehicleSelectionView(
+                    selectedVehicle: $viewModel.selectedVehicle,
+                    vehicles: viewModel.vehicles
+                )
             }
         }
         .onChange(of: scenePhase) { _, newScenePhase in

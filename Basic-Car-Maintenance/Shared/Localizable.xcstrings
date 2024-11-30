@@ -787,6 +787,9 @@
         }
       }
     },
+    "All Vehicles" : {
+
+    },
     "An Error Occurred" : {
       "comment" : "Title for alert shown when adding maintenance event fails",
       "localizations" : {
@@ -939,6 +942,9 @@
           }
         }
       }
+    },
+    "By Vehicle" : {
+      "comment" : "Sorting option that sorts items according to vehicle type."
     },
     "Can't Delete Last Vehicle" : {
       "localizations" : {
@@ -3586,6 +3592,9 @@
     "No events to export for this vehicle." : {
 
     },
+    "No maintenance events found for the selected vehicle." : {
+
+    },
     "No Name" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -3666,6 +3675,9 @@
           }
         }
       }
+    },
+    "No Results" : {
+
     },
     "Notes" : {
       "comment" : "Maintenance event notes text field label",
@@ -4539,6 +4551,9 @@
           }
         }
       }
+    },
+    "Select Vehicle" : {
+
     },
     "Settings" : {
       "comment" : "Label to display settings.",
