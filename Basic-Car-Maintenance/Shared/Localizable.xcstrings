@@ -944,7 +944,7 @@
       }
     },
     "By Vehicle" : {
-      "comment" : "Sorting option that sorts items according to vehicle type."
+      "comment" : "Sorting option that sorts items according to the vehicle."
     },
     "Can't Delete Last Vehicle" : {
       "localizations" : {

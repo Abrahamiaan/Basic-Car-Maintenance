@@ -95,7 +95,7 @@ struct DashboardView: View {
                             systemImage: "wrench",
                             description: Text("Add your first maintenance")
                         )
-                    } else if viewModel.sortedEvents.isEmpty && viewModel.sortOption == .vehicleType {
+                    } else if viewModel.sortedEvents.isEmpty && viewModel.sortOption == .byVehicle {
                         ContentUnavailableView(
                             "No Results",
                             systemImage: SFSymbol.magnifyingGlass,
@@ -130,7 +130,7 @@ struct DashboardView: View {
                     Menu {
                         Picker(selection: $viewModel.sortOption) {
                             ForEach(DashboardViewModel.SortOption.allCases) { option in
-                                if option != .vehicleType {
+                                if option != .byVehicle {
                                     Text(option.label)
                                         .tag(option)
                                 }
@@ -139,12 +139,12 @@ struct DashboardView: View {
                             EmptyView()
                         }
                         
-                        Button(action: {
-                            viewModel.sortOption = .vehicleType
+                        Button {
+                            viewModel.sortOption = .byVehicle
                             isShowingVehicleSelection = true
-                        }, label: {
-                            Text(DashboardViewModel.SortOption.vehicleType.label)
-                        })
+                        } label: {
+                            Text(DashboardViewModel.SortOption.byVehicle.label)
+                        }
                     } label: {
                         Image(systemName: SFSymbol.filter)
                     }
@@ -201,7 +201,7 @@ struct DashboardView: View {
             }
             .sheet(isPresented: $isShowingVehicleSelection) {
                 VehicleSelectionView(
-                    selectedVehicle: $viewModel.selectedVehicle,
+                    selectedVehicle: $viewModel.selectedVehicleToSort,
                     vehicles: viewModel.vehicles
                 )
             }

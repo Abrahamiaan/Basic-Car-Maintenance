@@ -9,29 +9,31 @@
 import SwiftUI
 
 struct VehicleSelectionView: View {
-    @Environment(\.dismiss) var dismiss
     @Binding var selectedVehicle: Vehicle?
+    
     var vehicles: [Vehicle]
+    
+    @Environment(\.dismiss) var dismiss
 
     var body: some View {
         NavigationView {
-            List {
-                Button(action: {
+            List {  
+                Button {
                     selectedVehicle = nil
                     dismiss()
-                }, label: {
+                } label: {
                     Text("All Vehicles")
                         .fontWeight(.bold)
                         .foregroundColor(.blue)
-                })
+                }
                 
-                ForEach(vehicles, id: \.id) { vehicle in
-                    Button(action: {
+                ForEach(vehicles) { vehicle in
+                    Button {
                         selectedVehicle = vehicle
                         dismiss()
-                    }, label: {
+                    } label: {
                         Text(vehicle.name)
-                    })
+                    }
                 }
             }
             .navigationTitle("Select Vehicle")

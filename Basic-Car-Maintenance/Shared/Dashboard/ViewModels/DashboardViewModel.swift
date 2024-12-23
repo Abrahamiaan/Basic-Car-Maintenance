@@ -23,7 +23,7 @@ class DashboardViewModel {
     var vehicles = [Vehicle]()
     var searchText: String = ""
     var isLoading = false
-    var selectedVehicle: Vehicle?
+    var selectedVehicleToSort: Vehicle? 
 
     var sortedEvents: [MaintenanceEvent] {
         switch sortOption {
@@ -31,8 +31,8 @@ class DashboardViewModel {
             return events.sorted { $0.date < $1.date }
         case .newestToOldest:
             return events.sorted { $0.date > $1.date }
-        case .vehicleType:
-            if let vehicle = selectedVehicle {
+        case .byVehicle:
+            if let vehicle = selectedVehicleToSort {
                 return events.filter { $0.vehicleID == vehicle.id }
             } else {
                 return events
@@ -190,7 +190,7 @@ extension DashboardViewModel {
     enum SortOption: Int, CaseIterable, Identifiable {
         case oldestToNewest = 0
         case newestToOldest = 1
-        case vehicleType = 2
+        case byVehicle = 2
         case custom = 3
         
         var id: Int {
@@ -211,10 +211,10 @@ extension DashboardViewModel {
                 LocalizedStringResource(
                     "Custom",
                     comment: "Sorting option that sorts items according to the user's preferences.")
-            case .vehicleType:
+            case .byVehicle:
                 LocalizedStringResource(
                     "By Vehicle",
-                    comment: "Sorting option that sorts items according to vehicle type.")
+                    comment: "Sorting option that sorts items according to the vehicle.")
             }
         }
     }
