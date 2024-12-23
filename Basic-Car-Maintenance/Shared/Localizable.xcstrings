@@ -1218,6 +1218,9 @@
         }
       }
     },
+    "Close" : {
+
+    },
     "Color" : {
       "localizations" : {
         "be" : {
@@ -2057,6 +2060,9 @@
           }
         }
       }
+    },
+    "Error: Failed to save CSV file." : {
+
     },
     "Export" : {
       "localizations" : {

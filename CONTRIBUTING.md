@@ -12,11 +12,6 @@ This app will be deployed on the Apple App Store, available for iOS 17.0 or late
 # Getting Started
 ## Prerequisites
 * Download Xcode 16.0 or later
-* Install [SwiftLint](https://github.com/realm/SwiftLint) onto your machine via [Homebrew](https://brew.sh/)
-   * This is not a requirement, but is preferred.
-```sh
-brew install swiftlint
-```
 * Set your Xcode settings correctly:
    * Open Xcode Settings `Cmd + ,`
    * Text Editing
@@ -68,7 +63,10 @@ We are going to set up the Firebase emulator to be able to load the data locally
 ## Start Working on an Issue
 * Anytime you run the project, first in Terminal `cd` to `backend` in the `Basic-Car-Maintenance` directory
    * this is the directory with the `firebase.json` file, you should see that if you type `ls`
-* Run `firebase emulators:start --import=./local-data --export-on-exit`, which will start the emulators, and keep your data in `local-data` directory.
+* Run this command, which will start the emulators, and keep your data in `local-data` directory.
+```sh
+firebase emulators:start --import=./local-data --export-on-exit
+```
    * Meaning when you start and stop the emulator your data will persist.
 * Run the app
    * You should see your anonymous user in Authentication, and once you add new data, see it in Firestore emulator UI at: http://127.0.0.1:4000/firestore
